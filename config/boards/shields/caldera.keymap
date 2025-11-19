@@ -5,34 +5,68 @@
 / {
         keymap {
                 compatible = "zmk,keymap";
-
                 default_layer {
-// ---------------------------------------------------------------------------------
-// |   `  |  1  |  2  |  3  |  4  |  5  |     |  6  |  7  |  8  |  9  |  0  | BKSP |
-// |  TAB |  Q  |  W  |  E  |  R  |  T  |     |  Y  |  U  |  I  |  O  |  P  |  \   |
-// | CAPS |  A  |  S  |  D  |  F  |  G  |     |  H  |  J  |  K  |  L  |  ;  |  ENT |
-// | SHFT |  Z  |  X  |  C  |  V  |  B  |     |  N  |  M  |  ,  |  .  |  /  | APOS |
-// | CTRL | ALT | GUI | SPC | SPC | SPC |     | SPC | LOW |LARW |DARW |UARW | RARW |
+   // --------------------------------------     --------------------------------------
+   // | `~    |  1! | 2@  | 3#  | 4$  | 5%  |     |  6^ |  7& |  8* |  9( |  0) | Back |
+   // | Tab   |  Q  | W   | E   | R   | T   |     |  Y  |  U  |  I  |  O  |  P  |  \|  |
+   // | Caps  |  A  | S   | D   | F   | G   |     |  H  |  J  |  K  |  L  |  ;: | Ret  |
+   // | Shift |  Z  | X   | C   | V   | B   |     |  N  |  M  |  ,< |  .> |  /? |  '"  |
+   // | Ctrl  | Win | Alt | Esc | Lyr | Spc |     | Spc | Lyr |  -_ |  =+ |  [{ |  ]}  |
                         bindings = <
-   &kp GRAVE  &kp N1    &kp N2    &kp N3     &kp N4     &kp N5               &kp N6     &kp N7  &kp N8     &kp N9    &kp N0    &kp BSPC
-   &kp TAB    &kp Q     &kp W     &kp E      &kp R      &kp T                &kp Y      &kp U   &kp I      &kp O     &kp P     &kp BSLH
-   &kp CAPS   &kp A     &kp S     &kp D      &kp F      &kp G                &kp H      &kp J   &kp K      &kp L     &kp SEMI  &kp RET
-   &kp LSHFT  &kp Z     &kp X     &kp C      &kp V      &kp B                &kp N      &kp M   &kp COMMA  &kp DOT   &kp FSLH  &kp APOS
-   &kp LCTRL  &kp LALT  &kp LGUI  &kp SPACE  &kp LALT   &kp LGUI             &kp SPACE  &mo 1   &kp LARW   &kp DARW  &kp UARW  &kp RARW
+   &kp GRAVE  &kp N1    &kp N2    &kp N3   &kp N4  &kp N5         &kp N6     &kp N7  &kp N8     &kp N9    &kp N0    &kp BSPC
+   &kp TAB    &kp Q     &kp W     &kp E    &kp R   &kp T          &kp Y      &kp U   &kp I      &kp O     &kp P     &kp BSLH
+   &kp CAPS   &kp A     &kp S     &kp D    &kp F   &kp G          &kp H      &kp J   &kp K      &kp L     &kp SEMI  &kp RET
+   &kp LSHFT  &kp Z     &kp X     &kp C    &kp V   &kp B          &kp N      &kp M   &kp COMMA  &kp DOT   &kp FSLH  &kp APOS
+   &kp LCTRL  &kp LWIN  &kp LALT  &kp ESC  &mo 1   &kp SPACE      &kp SPACE  &mo 1   &kp MINUS  &kp EQUAL &kp LBKT  &kp RBKT
                         >;
                 };
                 lower_layer {
-// ------------------------------------------------------------------------------------------------------------
-// |       |  BT1  |  BT2  |  BT3  |  BT4  |  BT5  |          |       |       |       |       |       | BTCLR |
-// |       |       |       |       |       |       |          |       |       |       |       |       |       |
-// |       |       |       | LPAR  | RPAR  |       |          |       | LBKT  | RBKT  |       |       |       |
-// |       |       |       |       |       |       |          |       |       |       |       |       |       |
+   // ----------------------------------------     --------------------------------------
+   // |      | BT1 | BT2 | BT3 | BT4 |  BT5  |     |  7  |  8  |  9  |  -  |     | Del  |
+   // |      |     |     |     |     |       |     |  4  |  5  |  6  |  +  |     |      |
+   // |      |     |     |     |     | BTCLR |     |  1  |  2  |  3  | Ret |     |      |
+   // |      |     |     |     |     |       |     |  0  |  0  |  .  | Home|  ↑  | End  |
+   // |      |     |     |     | LYR |       |     |     | Lyr |     |  ←  |  ↓  |  →   |
                         bindings = <
-   &trans    &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4           &trans    &trans    &trans   &trans   &trans  &bt BT_CLR
-   &trans    &trans         &trans         &trans         &trans         &trans                 &trans    &trans    &trans   &trans   &trans  &trans
-   &trans    &trans         &trans         &kp LPAR       &kp RPAR       &trans                 &trans    &kp LBKT  &kp RBKT &kp MINUS   &kp EQUAL  &trans
-   &trans    &trans         &trans         &trans         &trans         &trans                 &trans    &trans    &trans   &trans   &trans  &trans
+   &trans  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4     &kp N7  &kp N8  &kp N9   &kp MINUS  &trans    &kp DEL
+   &trans  &trans       &trans       &trans       &trans       &trans           &kp N4  &kp N5  &kp N6   &kp PLUS   &trans    &trans
+   &trans  &trans       &trans       &trans       &trans       &bt BT_CLR       &kp N1  &kp N2  &kp N3   &kp RET    &trans    &trans
+   &trans  &trans       &trans       &trans       &trans       &trans           &kp N0  &kp N0  &kp DOT  &kp HOME   &kp UP    &kp END
+   &trans  &trans       &trans       &trans       &trans       &trans           &trans  &trans  &trans   &kp LEFT   &kp DOWN  &kp RIGHT
                         >;
                 };
         };
 };
+
+// Original Caldera layout 
+// (note that it used UARW DARW LARW RAWR instead of UP DOWN LEFT RIGHT for arrow codes)
+// --------------------------------------     ---------------------------------------
+// |   `  |  1  |  2  |  3  |  4  |  5  |     |  6  |  7  |  8  |  9  |  0  | BKSP  |
+// | TAB  |  Q  |  W  |  E  |  R  |  T  |     |  Y  |  U  |  I  |  O  |  P  |  \    |
+// | CAPS |  A  |  S  |  D  |  F  |  G  |     |  H  |  J  |  K  |  L  |  ;  |  ENT  |
+// | SHFT |  Z  |  X  |  C  |  V  |  B  |     |  N  |  M  |  ,  |  .  |  /  |  '    |
+// | CTRL | ALT | GUI | SPC | SPC | SPC |     | SPC | LOW |  ←  |  ↓  |  ↑  |  →    |
+// --------------------------------------     ---------------------------------------
+// |      | BT1 | BT2 | BT3 | BT4 | BT5 |     |     |     |     |     |     | BTCLR |
+// |      |     |     |     |     |     |     |     |     |     |     |     |       |
+// |      |     |     |  (  |  )  |     |     |     |  [  |  ]  |  -  |  =  |       |
+// |      |     |     |     |     |     |     |     |     |     |     |     |       |
+
+// https://zmk.dev/docs/keymaps
+
+// https://zmk.dev/docs/keymaps/list-of-keycodes
+// &kp=keypress
+// LWIN=LGUI=Windows button
+// GRAVE=` ("grave accent"), LARW=<-, APOS=apostrophe, LPAR=(, LBKT=[, SPC=space, LOW=lower layer
+// DOT=., FSLH=/, SEMI=;, BSPC=backspace, BSLH=backslash, RET=enter
+
+// layers
+// default_layer = layer 0, lower_layer = layer 1
+// &mo 1 = momentary layer 1 (enable layer 1 while key is pressed)
+// &trans=transparent (pass key press down to next layer in stack)
+
+// bluetooth: 
+// &bt=bluetooth, BT_SEL 0-5 bluetooth bind to 0th-5th profile, 
+// BTCLR=clear selected profile (make sure to delete it from the computer too)
+
+// there are even options to do mouse button presses, movements, and scrolling
