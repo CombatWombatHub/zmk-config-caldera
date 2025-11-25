@@ -2,21 +2,25 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
+// alter behaviors https://zmk.dev/docs/config#changing-devicetree-properties
+&sl {release-after-ms = <1000>;}; // (default 1000) how long 'sticky layer' remains active
+&mt {tapping-term-ms = <200>;};   // (default 200)  how long to hold mod-tap key to switch to "hold" value
+
 / {
         keymap {
                 compatible = "zmk,keymap";
                 default_layer {
-   // --------------------------------------------------        -------------------------------------------------
+   // --------------------------------------------------        --------------------------------------------------
    // | `~    |   1!  |   2@  |   3#   |   4$  |   5%  |        |   6^  |   7&   |   8*  |   9(  |   0)  |  Back |
    // | Tab   |   Q   |   W   |   E    |   R   |   T   |        |   Y   |   U    |   I   |   O   |   P   |  Del  |
    // | Esc   |   A   |   S   |   D    |   F   |   G   |        |   H   |   J    |   K   |   L   |   ;:  |  '"   |
-   // | Shift |   Z   |   X   |   C    |   V   |   B   |        |   N   |   M    |   ,<  |   .>  |   /?  |  Ret  |
+   // | Shift |   Z   |   X   |   C    |   V   |   B   |        |   N   |   M    |   ,<  |   .>  |   /?  | Shift(hold) Ret(tap) |
    // | Ctrl  |  Win  |  Alt  | Toggle |  Hold |  Spc  |        |  Spc  | Sticky |   ←   |   ↑   |   ↓   |   →   |
                         bindings = <
    &kp GRAVE  &kp N1    &kp N2    &kp N3  &kp N4  &kp N5        &kp N6     &kp N7  &kp N8     &kp N9   &kp N0    &kp BSPC
    &kp TAB    &kp Q     &kp W     &kp E   &kp R   &kp T         &kp Y      &kp U   &kp I      &kp O    &kp P     &kp DEL
    &kp ESC    &kp A     &kp S     &kp D   &kp F   &kp G         &kp H      &kp J   &kp K      &kp L    &kp SEMI  &kp APOS
-   &kp LSHFT  &kp Z     &kp X     &kp C   &kp V   &kp B         &kp N      &kp M   &kp COMMA  &kp DOT  &kp FSLH  &kp RET
+   &kp LSHFT  &kp Z     &kp X     &kp C   &kp V   &kp B         &kp N      &kp M   &kp COMMA  &kp DOT  &kp FSLH  &mt LSHFT RET 
    &kp LCTRL  &kp LWIN  &kp LALT  &tog 1  &mo 1   &kp SPACE     &kp SPACE  &sl 1   &kp LEFT   &kp UP   &kp DOWN  &kp RIGHT 
                         >;
                 };
@@ -38,14 +42,13 @@
         };
 };
 
-// Original Caldera layout 
-// (note that it used UARW DARW LARW RAWR instead of UP DOWN LEFT RIGHT for arrow codes)
+// Original Caldera layout
 // --------------------------------------     ---------------------------------------
 // |   `  |  1  |  2  |  3  |  4  |  5  |     |  6  |  7  |  8  |  9  |  0  | BKSP  |
-// | TAB  |  Q  |  W  |  E  |  R  |  T  |     |  Y  |  U  |  I  |  O  |  P  |  \    |
-// | CAPS |  A  |  S  |  D  |  F  |  G  |     |  H  |  J  |  K  |  L  |  ;  |  ENT  |
-// | SHFT |  Z  |  X  |  C  |  V  |  B  |     |  N  |  M  |  ,  |  .  |  /  |  '    |
-// | CTRL | ALT | GUI | SPC | SPC | SPC |     | SPC | LOW |  ←  |  ↓  |  ↑  |  →    |
+// | TAB  |  Q  |  W  |  E  |  R  |  T  |     |  Y  |  U  |  I  |  O  |  P  | \     |
+// | CAPS |  A  |  S  |  D  |  F  |  G  |     |  H  |  J  |  K  |  L  |  ;  | ENT   |
+// | SHFT |  Z  |  X  |  C  |  V  |  B  |     |  N  |  M  |  ,  |  .  |  /  | '     |
+// | CTRL | ALT | GUI | SPC | SPC | SPC |     | SPC | LOW |  ←  |  ↓  |  ↑  | →     |
 // --------------------------------------     ---------------------------------------
 // |      | BT1 | BT2 | BT3 | BT4 | BT5 |     |     |     |     |     |     | BTCLR |
 // |      |     |     |     |     |     |     |     |     |     |     |     |       |
@@ -53,22 +56,26 @@
 // |      |     |     |     |     |     |     |     |     |     |     |     |       |
 
 // https://zmk.dev/docs/keymaps
-
 // https://zmk.dev/docs/keymaps/list-of-keycodes
-// &kp=keypress
-// LWIN=LGUI=Windows button
-// GRAVE=` ("grave accent"), LARW=<-, APOS=apostrophe, LPAR=(, LBKT=[, SPC=space, LOW=lower layer
-// DOT=., FSLH=/, SEMI=;, BSPC=backspace, BSLH=backslash, RET=enter
+
+// key behaviors
+// &kp A = keypress A
+// &mt LSHFT A = mod-tap (shift if held, A if tapped) https://zmk.dev/docs/keymaps/behaviors/hold-tap#mod-tap
+
+// keycodes 
+// LWIN=LGUI=Windows Button
+// GRAVE=`("grave accent") APOS=apostrophe LPAR=( LBKT=[ DOT=.
+// SPC=space FSLH=/ SEMI=; BSPC=backspace BSLH=backslash RET=enter
+// &mkp = mouse key press, &mmv = mouse move, &msc = mouse scroll
 
 // layers
-// default_layer = layer 0, lower_layer = layer 1
-// &mo  1 = momentary layer 1 (enable layer 1 while key is pressed)
-// &sl  1 = sticky layer 1 (activate layer 1 for 1 second or until the next key is pressed)
-// &tog 1 = toggle layer 1 (activate layer 1 until pressed again)
-// &trans=transparent (pass key press down to next layer in stack)
+// default_layer = layer 0, lower_one = layer 1
+// &mo  1 = momentary layer 1 (activate layer 1 while key is pressed)
+// &sl  1 =    sticky layer 1 (activate layer 1 until next key pressed, or until release-after-ms is elapsed) https://zmk.dev/docs/keymaps/behaviors/sticky-layer
+// &tog 1 =    toggle layer 1 (activate layer 1 until pressed again)
+// &trans =       transparent (pass key press down to next layer in stack)
+// &none  =      no key press (do not pass to next active layer either)
 
-// bluetooth: 
-// &bt=bluetooth, BT_SEL 0-5 bluetooth bind to 0th-5th profile, 
-// BTCLR=clear selected profile (make sure to delete it from the computer too)
-
-// there are even options to do mouse button presses, movements, and scrolling
+// bluetooth
+// &bt BT_SEL 0 = select 1st bluetooth profile (i.e. connect to 1st device) (0-4)
+// &bt BTCLR    = clear selected profile (make sure to delete it from the computer too)
