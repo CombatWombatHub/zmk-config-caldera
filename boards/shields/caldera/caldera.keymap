@@ -7,47 +7,32 @@
                 compatible = "zmk,keymap";
                 default_layer {
    // --------------------------------------------------        -------------------------------------------------
-   // | `~    |   1!  |   2@  |   3#   |   4$  |   5%  |        |   6^  |  7&   |   8*  |  9(   |   0)  |  Back |
-   // | Tab   |   Q   |   W   |   E    |   R   |   T   |        |   Y   |  U    |   I   |  O    |   P   |  Del  |
-   // | Esc   |   A   |   S   |   D    |   F   |   G   |        |   H   |  J    |   K   |   L   |   ;:  |  '"   |
-   // | Shift |   Z   |   X   |   C    |   V   |   B   |        |   N   |  M    |  ,<   |  .>   |   /?  |  Ret  |
-   // | Ctrl  |  Win  |  Alt  | NumPad | Chars |  Spc  |        |  Spc  | Chars |   ←   |   ↓   |   ↑   |   →   |
+   // | `~    |   1!  |   2@  |   3#   |   4$  |   5%  |        |   6^  |   7&   |   8*  |   9(  |   0)  |  Back |
+   // | Tab   |   Q   |   W   |   E    |   R   |   T   |        |   Y   |   U    |   I   |   O   |   P   |  Del  |
+   // | Esc   |   A   |   S   |   D    |   F   |   G   |        |   H   |   J    |   K   |   L   |   ;:  |  '"   |
+   // | Shift |   Z   |   X   |   C    |   V   |   B   |        |   N   |   M    |   ,<  |   .>  |   /?  |  Ret  |
+   // | Ctrl  |  Win  |  Alt  | Toggle |  Hold |  Spc  |        |  Spc  | Sticky |   ←   |   ↑   |   ↓   |   →   |
                         bindings = <
-   &kp GRAVE  &kp N1    &kp N2    &kp N3  &kp N4  &kp N5       &kp N6     &kp N7  &kp N8     &kp N9    &kp N0    &kp BSPC
-   &kp TAB    &kp Q     &kp W     &kp E   &kp R   &kp T        &kp Y      &kp U   &kp I      &kp O     &kp P     &kp DEL
-   &kp ESC    &kp A     &kp S     &kp D   &kp F   &kp G        &kp H      &kp J   &kp K      &kp L     &kp SEMI  &kp APOS
-   &kp LSHFT  &kp Z     &kp X     &kp C   &kp V   &kp B        &kp N      &kp M   &kp COMMA  &kp DOT   &kp FSLH  &kp RET
-   &kp LCTRL  &kp LWIN  &kp LALT  &mo 2   &mo 1   &kp SPACE    &kp SPACE  &mo 1   &kp LEFT   &kp DOWN  &kp UP    &kp RIGHT 
+   &kp GRAVE  &kp N1    &kp N2    &kp N3  &kp N4  &kp N5        &kp N6     &kp N7  &kp N8     &kp N9   &kp N0    &kp BSPC
+   &kp TAB    &kp Q     &kp W     &kp E   &kp R   &kp T         &kp Y      &kp U   &kp I      &kp O    &kp P     &kp DEL
+   &kp ESC    &kp A     &kp S     &kp D   &kp F   &kp G         &kp H      &kp J   &kp K      &kp L    &kp SEMI  &kp APOS
+   &kp LSHFT  &kp Z     &kp X     &kp C   &kp V   &kp B         &kp N      &kp M   &kp COMMA  &kp DOT  &kp FSLH  &kp RET
+   &kp LCTRL  &kp LWIN  &kp LALT  &tog 1  &mo 1   &kp SPACE     &kp SPACE  &sl 1   &kp LEFT   &kp UP   &kp DOWN  &kp RIGHT 
                         >;
                 };
-                character_layer {
-   // --------------------------------------------------       -------------------------------------------------
-   // |       |       |       |       |        |       |       |       |       |       |  -_   |  =+   |       |
-   // |       |       |       |       |        |       |       |       |       |       |  [{   |  ]}   |   \|  |
-   // |       |       |       |       |        |       |       |       |       |       |       |       |       |
-   // |       |       |       |       |        |       |       |       |       |       |       |       |       |
-   // |       |       |       |       |  Chars |       |       |       | Chars | Home  |       |       |  End  |
-                        bindings = <
-   &trans  &trans  &trans  &trans  &trans  &trans              &trans  &trans  &trans    &kp MINUS  &kp EQUAL  &trans
-   &trans  &trans  &trans  &trans  &trans  &trans              &trans  &trans  &trans    &kp LBKT   &kp RBKT   &kp BSLH
-   &trans  &trans  &trans  &trans  &trans  &trans              &trans  &trans  &trans    &trans     &trans     &trans
-   &trans  &trans  &trans  &trans  &trans  &trans              &trans  &trans  &trans    &kp HOME   &kp UP     &kp END
-   &trans  &trans  &trans  &trans  &trans  &trans              &trans  &trans  &kp HOME  &trans     &trans     &kp END
-                        >;
-                };
-                numpad_layer {
-   // --------------------------------------------------                          -------------------------------------
-   // | BTCLR |  BT1  |  BT2  |   BT3  |  BT4  |  BT5  |                          |     |     |     |     |     |     |
-   // |       |       |       |        |       |       |                          |     |  7  |  8  |  9  |  +  |     |
-   // |       |       |       |        |       |       |                          |     |  4  |  5  |  6  |  +  |     |
-   // |       |       |       |        |       |       |                          |     |  1  |  2  |  3  | Ret |     |
-   // |       |       |       | NumPad |       |       |                          |     |  0  |  0  |  .  | Ret |     |
-                        bindings = <
-   &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4    &trans  &trans  &trans  &trans   &trans    &trans
-   &trans     &trans       &trans       &trans       &trans       &trans          &trans  &kp N7  &kp N8  &kp N9   &kp PLUS  &trans
-   &trans     &trans       &trans       &trans       &trans       &trans          &trans  &kp N4  &kp N5  &kp N6   &kp PLUS  &trans
-   &trans     &trans       &trans       &trans       &trans       &trans          &trans  &kp N1  &kp N2  &kp N3   &kp RET   &trans
-   &trans     &trans       &trans       &trans       &trans       &trans          &trans  &kp N0  &kp N0  &kp DOT  &kp RET   &trans
+                layer_one {
+   // --------------------------------------------------                          -----------------------------------------
+   // | BTCLR |  BT1  |  BT2  |   BT3  |  BT4  |  BT5  |                          |     |   7  |  8   |  9  |  -_  |  =+  |
+   // |       |       |       |        |       |       |                          |     |   4  |  5   |  6  |  [{  |  ]}  |
+   // |       |       |       |        |       |       |                          |     |   1  |  2   |  3  |  +   |  \|  |
+   // |       |       |       |        |       |       |                          |     |   0  |  0   |     |      |      |
+   // |       |       |       |        |       |       |                          |     |      |      |     |      | End  |
+                        bindings = < 
+   &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4    &trans &kp N7 &kp N8   &kp N9 &kp MINUS &kp EQUAL
+   &trans     &trans       &trans       &trans       &trans       &trans          &trans &kp N4 &kp N5   &kp N6 &kp LBKT  &kp RBKT
+   &trans     &trans       &trans       &trans       &trans       &trans          &trans &kp N1 &kp N2   &kp N3 &kp PLUS  &kp BSLH
+   &trans     &trans       &trans       &trans       &trans       &trans          &trans &kp N0 &kp N0   &trans &trans    &trans
+   &trans     &trans       &trans       &trans       &trans       &trans          &trans &trans &kp HOME &trans &trans    &kp END
                         >;
                 };
         };
@@ -77,7 +62,9 @@
 
 // layers
 // default_layer = layer 0, lower_layer = layer 1
-// &mo 1 = momentary layer 1 (enable layer 1 while key is pressed)
+// &mo  1 = momentary layer 1 (enable layer 1 while key is pressed)
+// &sl  1 = sticky layer 1 (activate layer 1 for 1 second or until the next key is pressed)
+// &tog 1 = toggle layer 1 (activate layer 1 until pressed again)
 // &trans=transparent (pass key press down to next layer in stack)
 
 // bluetooth: 
