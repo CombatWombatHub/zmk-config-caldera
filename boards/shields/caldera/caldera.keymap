@@ -4,37 +4,38 @@
 
 // alter behaviors https://zmk.dev/docs/config#changing-devicetree-properties
 &sl {release-after-ms = <1000>;}; // (default 1000) how long 'sticky layer' remains active
+&sk {release-after-ms = <1000>;}; // (default 1000) how long 'sticky key'   remains active
 &mt {tapping-term-ms = <200>;};   // (default 200)  how long to hold mod-tap key to switch to "hold" value
 
 / {
         keymap {
                 compatible = "zmk,keymap";
                 default_layer {
-   // --------------------------------------------------        --------------------------------------------------
-   // | `~    |   1!  |   2@  |   3#   |   4$  |   5%  |        |   6^  |   7&   |   8*  |   9(  |   0)  |  Back |
-   // | Tab   |   Q   |   W   |   E    |   R   |   T   |        |   Y   |   U    |   I   |   O   |   P   |  Del  |
-   // | Esc   |   A   |   S   |   D    |   F   |   G   |        |   H   |   J    |   K   |   L   |   ;:  |  '"   |
-   // | Shift |   Z   |   X   |   C    |   V   |   B   |        |   N   |   M    |   ,<  |   .>  |   /?  | Shift(hold) Ret(tap) |
-   // | Ctrl  |  Win  |  Alt  | Toggle |  Hold |  Spc  |        |  Spc  | Sticky |   ←   |   ↑   |   ↓   |   →   |
+   // -------------------------------------------------         ----------------------------------------------
+   // | `~    |   1!  |   2@  |   3#  |   4$  |   5%  |         |   6^  |   7&  |  8*  |  9(  |  0)  |  Back |
+   // | Tab   |   Q   |   W   |   E   |   R   |   T   |         |   Y   |   U   |  I   |  O   |  P   |  Del  |
+   // | Caps  |   A   |   S   |   D   |   F   |   G   |         |   H   |   J   |  K   |  L   |  ;:  |  '"   |
+   // | Shift |   Z   |   X   |   C   |   V   |   B   |         |   N   |   M   |  ,<  |  .>  |  /?  | Shift(hold) Ret(tap) |
+   // | Ctrl  |  Win  |  Alt  |  Esc  |  Lyr  |  Spc  |         |  Spc  |  Lyr  |  ←   |  ↑   |  ↓   |   →   |
                         bindings = <
    &kp GRAVE  &kp N1    &kp N2    &kp N3  &kp N4  &kp N5        &kp N6     &kp N7  &kp N8     &kp N9   &kp N0    &kp BSPC
    &kp TAB    &kp Q     &kp W     &kp E   &kp R   &kp T         &kp Y      &kp U   &kp I      &kp O    &kp P     &kp DEL
-   &kp ESC    &kp A     &kp S     &kp D   &kp F   &kp G         &kp H      &kp J   &kp K      &kp L    &kp SEMI  &kp APOS
-   &kp LSHFT  &kp Z     &kp X     &kp C   &kp V   &kp B         &kp N      &kp M   &kp COMMA  &kp DOT  &kp FSLH  &mt LSHFT RET 
-   &kp LCTRL  &kp LWIN  &kp LALT  &tog 1  &mo 1   &kp SPACE     &kp SPACE  &sl 1   &kp LEFT   &kp UP   &kp DOWN  &kp RIGHT 
+   &kp CAPS   &kp A     &kp S     &kp D   &kp F   &kp G         &kp H      &kp J   &kp K      &kp L    &kp SEMI  &kp APOS
+   &sk LSHFT  &kp Z     &kp X     &kp C   &kp V   &kp B         &kp N      &kp M   &kp COMMA  &kp DOT  &kp FSLH  &mt LSHFT RET 
+   &kp LCTRL  &kp LWIN  &kp LALT  &kp ESC &mo 1   &kp SPACE     &kp SPACE  &sl 1   &kp LEFT   &kp UP   &kp DOWN  &kp RIGHT 
                         >;
                 };
                 layer_one {
    // --------------------------------------------------                          -----------------------------------------
    // | BTCLR |  BT1  |  BT2  |   BT3  |  BT4  |  BT5  |                          |     |   7  |  8   |  9  |  -_  |  =+  |
    // |       |       |       |        |       |       |                          |     |   4  |  5   |  6  |  [{  |  ]}  |
-   // |       |       |       |        |       |       |                          |     |   1  |  2   |  3  |  +   |  \|  |
+   // |       |       |       |        |       |       |                          |     |   1  |  2   |  3  |      |  \|  |
    // |       |       |       |        |       |       |                          |     |   0  |  0   |     |      |      |
    // |       |       |       |        |       |       |                          |     |      |      |     |      | End  |
                         bindings = < 
    &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4    &trans &kp N7 &kp N8   &kp N9 &kp MINUS &kp EQUAL
    &trans     &trans       &trans       &trans       &trans       &trans          &trans &kp N4 &kp N5   &kp N6 &kp LBKT  &kp RBKT
-   &trans     &trans       &trans       &trans       &trans       &trans          &trans &kp N1 &kp N2   &kp N3 &kp PLUS  &kp BSLH
+   &trans     &trans       &trans       &trans       &trans       &trans          &trans &kp N1 &kp N2   &kp N3 &trans    &kp BSLH
    &trans     &trans       &trans       &trans       &trans       &trans          &trans &kp N0 &kp N0   &trans &trans    &trans
    &trans     &trans       &trans       &trans       &trans       &trans          &trans &trans &kp HOME &trans &trans    &kp END
                         >;
@@ -61,6 +62,7 @@
 // key behaviors
 // &kp A = keypress A
 // &mt LSHFT A = mod-tap (shift if held, A if tapped) https://zmk.dev/docs/keymaps/behaviors/hold-tap#mod-tap
+// &sk LSHFT = sticky key (hold until another key is pressed)
 
 // keycodes 
 // LWIN=LGUI=Windows Button
