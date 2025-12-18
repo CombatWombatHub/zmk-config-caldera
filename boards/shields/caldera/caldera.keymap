@@ -40,6 +40,13 @@
    &trans &trans       &trans       &trans       &trans       &trans         &trans &trans   &kp HOME  &trans    &trans &trans
                         >;
                 };
+                // extra layers ignored during ZMK builds but available for ZMK Studio-enabled builds
+                extra_1 {
+                    status = "reserved";
+                };
+                extra_2 {
+                    status = "reserved";
+                };
         };
 };
 
