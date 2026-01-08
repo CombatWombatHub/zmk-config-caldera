@@ -9,7 +9,7 @@
 
 // unlock to grant ZMK studio access to make changes https://zmk.dev/docs/keymaps/behaviors/studio-unlock
 // may be redundant with the variables set in caldera_left.conf and caldera_right.conf
-&studio_unlock
+&studio_unlock;
 
 / {
         keymap {
