@@ -7,6 +7,10 @@
 &sk {release-after-ms = <1000>;}; // (default 1000) how long 'sticky key'   remains active
 &mt {tapping-term-ms = <200>;};   // (default 200)  how long to hold mod-tap key to switch to "hold" value
 
+// unlock to grant ZMK studio access to make changes https://zmk.dev/docs/keymaps/behaviors/studio-unlock
+// may be redundant with the variables set in caldera_left.conf and caldera_right.conf
+&studio_unlock
+
 / {
         keymap {
                 compatible = "zmk,keymap";
